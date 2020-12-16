@@ -1,13 +1,27 @@
 const keyAPI = '19532775-cd1fec64673db4c80a00103d2';
 
 export default {
-page: 1,
+_page: 1,
+per_page: 6,
 searchQuery: '',
+
+get page(){
+  return this._page;
+},
+set page(value){
+  this._page = value;
+},
+
+get perPage(){
+  return this.per_page;
+},
+set perPage(value){
+  this.per_page = value;
+},
 
 get query(){
   return this.searchQuery;
 },
-
 set query(value){
   this.searchQuery = value;
 },
@@ -24,7 +38,7 @@ fetchMore() {
 },
 
 fetchQuery(query) {
-  const url = `https://pixabay.com/api/?image_type=photo&orientation=horizontal&q=${query}&page=${this.page}&per_page=6&key=${keyAPI}`;
+  const url = `https://pixabay.com/api/?image_type=photo&orientation=horizontal&q=${query}&page=${this.page}&per_page=${this.perPage}&key=${keyAPI}`;
   return fetch(url)
     .then(res => {
       return res.json();
