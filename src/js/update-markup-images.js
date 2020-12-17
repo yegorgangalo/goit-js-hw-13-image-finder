@@ -6,7 +6,6 @@ export default {
     refs: {
         ul: document.querySelector('.gallery'),
     },
-    arrayPhoto: [],
 
     clearMarkupImages() {
         this.refs.ul.textContent = '';
@@ -19,15 +18,25 @@ export default {
     },
 
     onImgClickAddEventLightboxOpen() {
-        const arrayPhotoOldLength = this.arrayPhoto.length;
         const collectionPhotoNew = document.querySelectorAll('.photo-card img');
-        const arrayPhotoNew = [...collectionPhotoNew];
-        arrayPhotoNew.splice(0, arrayPhotoOldLength);
-        this.arrayPhoto = [...arrayPhotoNew];
-        // this.arrayPhoto.forEach(photo => photo.removeEventListener('click', openBigImage)); //чому не працює?
-        this.arrayPhoto.forEach(photo => photo.addEventListener('click', this.openLightboxBigImage));
-        // ArrayPhoto.forEach(photo => photo.onclick = openBigImage);// можна і так, але тоді більше нічого не повісиш на елемент, зате не накладаютсья події
+        collectionPhotoNew.forEach(photo => photo.removeEventListener('click', this.openLightboxBigImage));
+        collectionPhotoNew.forEach(photo => photo.addEventListener('click', this.openLightboxBigImage));
     },
+
+    // arrayPhoto: [],//спосіб замість removeEventListener
+    // onImgClickAddEventLightboxOpen() {
+    //     const collectionPhotoNew = document.querySelectorAll('.photo-card img');
+    //     const arrayPhotoNew = [...collectionPhotoNew];
+    //     const arrayPhotoOldLength = this.arrayPhoto.length;
+    //     arrayPhotoNew.splice(0, arrayPhotoOldLength);
+    //     this.arrayPhoto = [...arrayPhotoNew];
+    //     this.arrayPhoto.forEach(photo => photo.addEventListener('click', this.openLightboxBigImage));
+    // },
+
+    // onImgClickAddEventLightboxOpen() {
+    //     const collectionPhotoNew = document.querySelectorAll('.photo-card img');
+    //     collectionPhotoNew.forEach(photo => photo.onclick = this.openLightboxBigImage);// можна і так, але тоді більше нічого не повісиш на елемент, зате не накладаютсья події
+    // },
 
     openLightboxBigImage({ target }) {
         const srcBigImg = target.dataset.fullSize;
