@@ -1,21 +1,27 @@
-const debounce = require('lodash.debounce');
+import debounce from 'lodash.debounce';
 import { alert, notice, info, success, error } from '@pnotify/core';
 import apiService from './apiService.js';
 import updateMarkup from './update-markup-images.js';
-import buttonQuery from './button-query.js';
+import buttonQueryClass from './components/button-query.js';
+import scrollPage from './scroll-page.js';
+/* ------------------------------------------------------ */
 
+const buttonQuery = new buttonQueryClass('.js-load-btn')
 const { refs:{button} } = buttonQuery;
 const input = document.querySelector('input[name="query"]');
+/* ------------------------------------------------------ */
 
 const notifyOptions = {
   delay: 3000,
   width: '300px',
   text: 'There is no image with such tag! Try another.'
 };
+/* ------------------------------------------------------ */
 
 input.addEventListener('focus', ({target}) => target.value='');
 input.addEventListener('input', debounce(findImages, 500));
 button.addEventListener('click', findImagesMore);
+/* ------------------------------------------------------ */
 
 function findImages({ target }) {
   updateMarkup.clearMarkupImages();
@@ -39,6 +45,7 @@ function findImages({ target }) {
       buttonQuery.show();
     });
 };
+/* ------------------------------------------------------ */
 
 function findImagesMore() {
   buttonQuery.disable();
@@ -53,15 +60,7 @@ function findImagesMore() {
       scrollPage();
     });
 };
+/* ------------------------------------------------------ */
 
-function scrollPage() {
-  setTimeout(() => {
-        const photoBlock = document.querySelector('.photo-card');
-        window.scrollBy({
-          top: photoBlock.clientHeight,
-          // top: window.innerHeight-photoBlock.clientHeight,
-          behavior: 'smooth',
-        });
-      }, 250);
-};
+
 
