@@ -1,6 +1,7 @@
 export default class buttonLoad {
-    constructor(selector) {
+    constructor({selector, hidden = false}) {
         this.refs = this.getRefs(selector);
+        hidden && this.hide();
     }
 
     getRefs(selector) {

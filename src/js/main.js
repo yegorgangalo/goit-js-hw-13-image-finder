@@ -6,7 +6,7 @@ import buttonQueryClass from './components/button-query.js';
 import scrollPage from './scroll-page.js';
 /* ------------------------------------------------------ */
 
-const buttonQuery = new buttonQueryClass('.js-load-btn')
+const buttonQuery = new buttonQueryClass({selector: '.js-load-btn', hidden: true})
 const { refs:{button} } = buttonQuery;
 const input = document.querySelector('input[name="query"]');
 /* ------------------------------------------------------ */
