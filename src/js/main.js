@@ -50,6 +50,18 @@ function findImagesMore() {
         return;
       };
       updateMarkup.updateMarkupImages(hits);
+      scrollPage();
     });
+};
+
+function scrollPage() {
+  setTimeout(() => {
+        const photoBlock = document.querySelector('.photo-card');
+        window.scrollBy({
+          top: photoBlock.clientHeight,
+          // top: window.innerHeight-photoBlock.clientHeight,
+          behavior: 'smooth',
+        });
+      }, 250);
 };
 
