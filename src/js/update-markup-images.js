@@ -2,7 +2,15 @@ import * as basicLightbox from 'basiclightbox';
 import imageHandleBar from '../template/image-template.hbs'
 /* ------------------------------------------------------ */
 
-export default {
+/* ------------------------------ */
+import { Spinner } from 'spin.js';
+const opts = {
+  color: 'rgba(0, 0, 0, 0.5)',
+};
+const spinner = new Spinner(opts);
+/* ------------------------------ */
+
+const updateMarkup = {
     refs: {
         ul: document.querySelector('.gallery'),
     },
@@ -19,11 +27,10 @@ export default {
 
     onImgClickAddEventLightboxOpen() {
         const collectionPhotoNew = document.querySelectorAll('.photo-card img');
-        collectionPhotoNew.forEach(photo => photo.removeEventListener('click', this.openLightboxBigImage));
         collectionPhotoNew.forEach(photo => photo.addEventListener('click', this.openLightboxBigImage));
     },
 
-    // arrayPhoto: [],//спосіб замість removeEventListener
+    // arrayPhoto: [],//2-ий спосіб
     // onImgClickAddEventLightboxOpen() {
     //     const collectionPhotoNew = document.querySelectorAll('.photo-card img');
     //     const arrayPhotoNew = [...collectionPhotoNew];
@@ -33,16 +40,23 @@ export default {
     //     this.arrayPhoto.forEach(photo => photo.addEventListener('click', this.openLightboxBigImage));
     // },
 
-    // onImgClickAddEventLightboxOpen() {
+    // onImgClickAddEventLightboxOpen() {//3-ій спосіб
     //     const collectionPhotoNew = document.querySelectorAll('.photo-card img');
     //     collectionPhotoNew.forEach(photo => photo.onclick = this.openLightboxBigImage);// можна і так, але тоді більше нічого не повісиш на елемент, зате не накладаютсья події
     // },
 
-    openLightboxBigImage({ target }) {
+    openLightboxBigImage ({ target }) {
+        spinner.spin(this.parentNode);
+        spinner.el.style.position = 'fixed';
         const srcBigImg = target.dataset.fullSize;
         const lightBox = basicLightbox.create(`
     		<img width="1400" height="900" src="${srcBigImg}">
         `);
-        lightBox.show();
+        lightBox.show() &&
+            setTimeout(() => {
+                spinner.stop();
+            }, 250);
     },
 };
+
+export default updateMarkup;
