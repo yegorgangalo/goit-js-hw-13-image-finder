@@ -1,7 +1,6 @@
 import * as basicLightbox from 'basiclightbox';
-import imageHandleBar from '../template/image-template.hbs'
+import imageHandleBar from '../template/image-template.hbs';
 /* ------------------------------------------------------ */
-
 /* ------------------------------ */
 import { Spinner } from 'spin.js';
 const opts = {
