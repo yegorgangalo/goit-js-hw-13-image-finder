@@ -48,27 +48,21 @@ function findImages({ target }) {
 };
 /* ------------------------------------------------------ */
 
-function findImagesMore(inputRef) {
-  return () => {
-    const searchQuery = inputRef.value;
-    if (!searchQuery) {
-      return;
-    };
-    // buttonQuery.disable();
-    apiService.fetchMore()
-      .then(({ hits }) => {
-        // buttonQuery.enable();
-        if (hits.length < apiService.perPage) {
-          // buttonQuery.hide();
-          return;
-        };
-        updateMarkup.updateMarkupImages(hits);
-        // scrollPage();
-      });
-  }
+function findImagesMore() {
+  // buttonQuery.disable();
+  apiService.fetchMore()
+    .then(({ hits }) => {
+      // buttonQuery.enable();
+      if (hits.length < apiService.perPage) {
+        // buttonQuery.hide();
+        return;
+      };
+      updateMarkup.updateMarkupImages(hits);
+      // scrollPage();
+    });
 };
 /* ------------------------------------------------------ */
 /* -----------------infinity Scroll------------------------------- */
-const {ioCallback, Refs:{target}} = new infinityScroll(findImagesMore(input));
+const {ioCallback, Refs:{target}} = new infinityScroll(findImagesMore, input);
 new IntersectionObserver(ioCallback).observe(target);
 /* -----------------infinity Scroll end------------------------------- */

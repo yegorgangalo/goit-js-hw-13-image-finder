@@ -1,16 +1,19 @@
 export default class infScroll {
-  constructor(callback, selector='body') {
+  constructor(callback, inputRef, selector='body') {
     this.Refs = this.getRefs(selector);
-    this.ioCallback = this.addInnerCallback(callback);
+    this.ioCallback = this.addInnerCallback(callback, inputRef);
     this.isIntersecting = false;
   }
 
-  addInnerCallback(callback) {
+  addInnerCallback(callback, inputRef) {
     return (entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           if (!this.isIntersecting) {
             this.isIntersecting = true;
+            return;
+          };
+          if (!inputRef.value) {
             return;
           };
           callback();
