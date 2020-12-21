@@ -7,9 +7,10 @@
     "test": "APP_ENV='devserver' webpack serve --port 8000 --open 'Google Chrome' --progress",
     "host": "APP_ENV='devserver' webpack serve --host 0.0.0.0 --open 'Google Chrome' --progress",
     "start": "webpack",
-    "depdev": "gh-pages -d dist",
     "build": "NODE_ENV='production' webpack",
-    "deploy": "gh-pages -d build"
+    "depdev": "webpack && gh-pages -d dist",
+    "depdev2": "webpack && node ./src/gh-deploy-options.js",
+    "deploy": "NODE_ENV='production' webpack && gh-pages -d build"
   },
   "repository": {
     "type": "git",
