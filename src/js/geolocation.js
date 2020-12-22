@@ -1,5 +1,6 @@
 // console.log(window.navigator);
 
+/* ----через колбек----- */
 // const onGetPositionSuccess = location => {
 //     console.log(location);
 // }
@@ -9,6 +10,7 @@
 // }
 // navigator.geolocation.getCurrentPosition(onGetPositionSuccess, onGetPositionError, options);
 
+/* -------через Проміс------ */
 const getCurrentPosition = () => {
     const options = {
         timeout: 5000,
