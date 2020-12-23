@@ -3,7 +3,8 @@ const keyAPI = '19532775-cd1fec64673db4c80a00103d2';
 export default {
 _page: 1,
 per_page: 15,
-searchQuery: '',
+  searchQuery: '',
+staticURL: 'https://pixabay.com/api/?image_type=photo&orientation=horizontal',
 
 fetchFirst(queryValue) {
   this.resetPage();
@@ -17,7 +18,7 @@ fetchMore() {
 },
 
 fetchQuery(query) {
-  const url = `https://pixabay.com/api/?image_type=photo&orientation=horizontal&q=${query}&page=${this.page}&per_page=${this.perPage}&key=${keyAPI}`;
+  const url = `${this.staticURL}&q=${query}&page=${this.page}&per_page=${this.perPage}&key=${keyAPI}`;
   return fetch(url)
     .then(res => {
       return res.json();
