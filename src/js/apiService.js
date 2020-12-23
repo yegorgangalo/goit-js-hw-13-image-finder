@@ -1,7 +1,7 @@
 const keyAPI = '19532775-cd1fec64673db4c80a00103d2';
 /* ------------Axios-------------------- */
 import axios from 'axios';
-axios.defaults.baseURL = `https://pixabay.com/api/?image_type=photo&orientation=horizontal&key=${keyAPI}`;
+axios.defaults.baseURL = `https://pixabay.com/api/?image_type=photo&orientation=horizontal`;
 //axios.defaults.headers.common['Autorization'] = `Bearer ${token}`; //ось так додаються заголовки
 /* -------------Axios end------------------- */
 
@@ -9,7 +9,7 @@ export default {
 _page: 1,
 per_page: 15,
 searchQuery: '',
-// staticURLQuery:`https://pixabay.com/api/?image_type=photo&orientation=horizontal&key=${keyAPI}`,
+// staticURLQuery:`https://pixabay.com/api/?image_type=photo&orientation=horizontal`,
 
 fetchFirst(queryValue) {
   this.resetPage();
@@ -23,13 +23,13 @@ fetchMore() {
 },
 
 async fetchQuery (query) {
-  const url = `&q=${query}&page=${this.page}&per_page=${this.perPage}`;
+  const url = `&q=${query}&page=${this.page}&per_page=${this.perPage}&key=${keyAPI}`;
   const {data} = await axios.get(url);
   return data;
 },
 // async fetchQuery (query) {
 //   try {
-//     const url = `${this.staticURLQuery}&q=${query}&page=${this.page}&per_page=${this.perPage}`;
+//     const url = `${this.staticURLQuery}&q=${query}&page=${this.page}&per_page=${this.perPage}&key=${keyAPI}`;
 //     const response = await fetch(url);
 //     return response.json();
 //   } catch (error) {
@@ -38,7 +38,7 @@ async fetchQuery (query) {
 //   }
 // },
 //fetchQuery (query) {
-  // const url = `${this.staticURLQuery}&q=${query}&page=${this.page}&per_page=${this.perPage}`;
+  // const url = `${this.staticURLQuery}&q=${query}&page=${this.page}&per_page=${this.perPage}&key=${keyAPI}`;
   // return fetch(url)
   //   .then(res => {
   //     return res.json();
